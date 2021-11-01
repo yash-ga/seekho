@@ -1,11 +1,6 @@
-const express = require('express');
-const mongoose = require('mongoose');
+const app = require('./index');
 
 const connect = require('./config/db');
-
-const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 app.listen(5000, async () => {
     await connect();
