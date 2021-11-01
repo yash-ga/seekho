@@ -5,7 +5,7 @@ const router = express.Router();
 const Board = require("../models/board.model");
 
 
-//CREATE Brand
+//CREATE A BOARD
 
 router.post("/", async (req, res) => {
 
@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
 });
 
 
-// GET ALL Brands
+// GET ALL BOARDS
 
 router.get("/", async (req, res) => {
 
@@ -25,7 +25,17 @@ router.get("/", async (req, res) => {
 });
 
 
-// UPDATE A BOARD
+// GET A BOARD BY ID
+
+router.get("/:id", async (req, res) => {
+
+    let board = await Board.findById(req.params.id).lean();
+
+    res.status(200).send({ board });
+});
+
+
+// UPDATE A BOARD BY ID
 router.patch("/:id", async (req, res) => {
     let board = await Board.findByIdAndUpdate(req.params.id, req.body, { new: true });
 
@@ -33,7 +43,7 @@ router.patch("/:id", async (req, res) => {
 
 });
 
-//delete Brand by ID
+// DELETE A BOARD BY ID
 
 router.delete("/:id", async (req, res) => {
 
